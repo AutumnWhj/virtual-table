@@ -2,9 +2,13 @@
   <div
     class="acho-table"
     :style="{ width: width + 'px', height: height + 'px' }"
-    @scroll="handleBodyScrollLeft"
+    @scroll="handleScrollLeft"
   >
-    <div class="table-container" :style="{ width: containerWidth + 'px' }">
+    <div class="table-container">
+      <div
+        class="acho-table-phantom"
+        :style="{ width: phantomWidth + 'px' }"
+      ></div>
       <div :style="{ transform }" class="table-header">
         <acho-table-header :columns="visibleColumns" ref="cnTableHeader">
           <template v-slot:colcaption="slotProps">
@@ -66,14 +70,13 @@ export default {
   data() {
     return {
       itemWidth: 100,
-      scrollLeft: 0,
       start: 0,
-      end: 2,
+      end: 0,
       transform: ''
     }
   },
   computed: {
-    containerWidth({ columns, itemWidth }) {
+    phantomWidth({ columns, itemWidth }) {
       return columns.length * itemWidth
     },
     visibleColumns({ columns }) {
@@ -84,14 +87,14 @@ export default {
     }
   },
   methods: {
-    handleBodyScrollLeft(event) {
+    handleScrollLeft(event) {
       window.requestAnimationFrame(() => {
         const scrollLeft = event.target.scrollLeft
         let start = Math.floor(scrollLeft / this.itemWidth)
 
         this.start = Math.max(start, 0)
         this.end = this.start + this.visibleCount
-
+        // 更新偏移量
         this.transform = `translate3d(${this.itemWidth * this.start}px,0,0)`
       })
     },
@@ -148,11 +151,17 @@ table th {
   z-index: 1;
 }
 .table-container {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 1;
 }
-
+.acho-table-phantom {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
 .acho-table-data-empty {
   width: 100%;
   text-align: center;
