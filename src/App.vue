@@ -68,7 +68,7 @@ export default {
         url: 'http://localhost:4000/api/virtualTable'
       })
       const { data: innerData } = JSON.parse(data) || {}
-      const { columnConfig, tableData } = JSON.parse(innerData) || {}
+      const { columnConfig, tableData } = innerData || {}
       this.cacheSource = tableData
       this.dataSource = tableData
       this.columnConfig = columnConfig

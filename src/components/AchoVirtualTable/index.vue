@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import AchoTable from './AchoTable.vue'
+import AchoTable from './Table.vue'
 import SearchCaption from './InnerComponents/SearchCaption.vue'
 import FilterHeader from './InnerComponents/FilterHeader.vue'
 

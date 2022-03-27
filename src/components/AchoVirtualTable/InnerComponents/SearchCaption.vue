@@ -23,8 +23,7 @@ export default {
     return {}
   },
   methods: {
-    handleSearch: function (e) {
-      console.log('handleSearch: ')
+    handleSearch(e) {
       const value = e.target.value.trim()
       this.action(this.caption.action, (i) => {
         if (!value) return true

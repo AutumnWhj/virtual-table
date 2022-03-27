@@ -12,7 +12,6 @@ server.on('request', async (req, res) => {
     res.status = 200
     res.end()
   }
-  console.log('req.url', req.url);
   if(req.url === '/api/virtualTable') {
     const csvPath = path.resolve(__dirname, './acho_export_virtual_scroll.csv')
     const data = await parserCSV(csvPath)
@@ -46,10 +45,10 @@ function parserCSV(csvPath) {
       }
     })
     .on('end', () => {
-      resolve(JSON.stringify({
+      resolve({
         columnConfig ,
         tableData: results
-      }))
+      })
     })
   })
 }

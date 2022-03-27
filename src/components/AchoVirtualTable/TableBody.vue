@@ -28,15 +28,11 @@ export default {
   props: {
     columns: {
       type: Array,
-      default: function () {
-        return []
-      }
+      default: () => []
     },
     dataSource: {
       type: Array,
-      default: function () {
-        return []
-      }
+      default: () => []
     }
   },
   mounted() {}
