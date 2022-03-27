@@ -1,0 +1,53 @@
+{
+  "name": "table-demo",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://github.com/AutumnWhj/virtual-table.git",
+  "scripts": {
+    "serve": "vue-cli-service serve & nodemon server/index.js",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "babel-eslint": "^10.1.0",
+    "css-loader": "^6.2.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "prettier": "^2.6.1",
+    "style-loader": "^3.2.1",
+    "vue-template-compiler": "^2.6.11",
+    "nodemon": "^2.0.15",
+    "csv-parser": "^3.0.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "vue/no-unused-components": "warn"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
