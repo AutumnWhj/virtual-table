@@ -1,5 +1,9 @@
 # virtual-table
 
+## 思路总结
+
+<https://juejin.cn/post/7079624959743508487>
+
 ## 效果
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5dd1f6d3c1ff4afdabc25fbeb38c91fb~tplv-k3u1fbpfcp-zoom-1.image)
