@@ -48,15 +48,11 @@ export default {
   props: {
     dataSource: {
       type: Array,
-      default: function () {
-        return []
-      }
+      default: () => []
     },
     columns: {
       type: Array,
-      default: function () {
-        return []
-      }
+      default: () => []
     },
     width: {
       type: Number,
@@ -89,13 +85,15 @@ export default {
   },
   methods: {
     handleBodyScrollLeft(event) {
-      const scrollLeft = event.target.scrollLeft
-      let start = Math.floor(scrollLeft / this.itemWidth)
+      window.requestAnimationFrame(() => {
+        const scrollLeft = event.target.scrollLeft
+        let start = Math.floor(scrollLeft / this.itemWidth)
 
-      this.start = Math.max(start, 0)
-      this.end = this.start + this.visibleCount
+        this.start = Math.max(start, 0)
+        this.end = this.start + this.visibleCount
 
-      this.transform = `translate3d(${this.itemWidth * this.start}px,0,0)`
+        this.transform = `translate3d(${this.itemWidth * this.start}px,0,0)`
+      })
     },
     calculateTableWidth() {
       const target = this.$el.getBoundingClientRect()
