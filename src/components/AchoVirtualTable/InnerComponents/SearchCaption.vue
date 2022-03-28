@@ -1,5 +1,5 @@
 <template>
-  <input type="text" @input="handleSearch" />
+  <input type="text" @input="handleSearch" :value="value" />
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
       type: Object,
       default: function () {}
     },
+    value: {
+      type: String,
+      default: ''
+    },
     namekey: {
       type: String,
       default: ''
@@ -19,15 +23,14 @@ export default {
       default: function () {}
     }
   },
-  data() {
-    return {}
-  },
   methods: {
     handleSearch(e) {
       const value = e.target.value.trim()
-      this.action(this.caption.action, (i) => {
-        if (!value) return true
-        return i[this.namekey].toUpperCase().includes(value.toUpperCase())
+      this.action(this.caption.action, () => {
+        return {
+          value,
+          prop: this.namekey
+        }
       })
     }
   }
