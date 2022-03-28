@@ -1,20 +1,17 @@
 <template>
-  <table class="acho-table-header">
+  <table>
     <colgroup>
-      <col v-for="(col, i) in columns" :key="i" :width="col.width || ''" />
+      <col v-for="col in columns" :key="col.prop" :width="col.width || ''" />
     </colgroup>
     <thead>
-      <tr v-if="withColumnCaption.length" class="acho-table-header-caption">
-        <template v-for="col in withColumnCaption">
-          <th
-            :key="col.name"
-            class="th-caption"
-            :colspan="col.caption && col.caption.colspan"
-          >
+      <tr v-if="columns.length" class="acho-table-header-caption">
+        <template v-for="col in columns">
+          <th :key="col.prop" class="th-caption">
             <slot
               v-if="col.caption && col.caption.slot"
               name="colcaption"
               v-bind:namekey="col.prop"
+              v-bind:value="col.caption.value"
               v-bind:caption="col.caption"
             ></slot>
           </th>
@@ -37,32 +34,7 @@ export default {
       type: Array,
       default: () => {}
     }
-  },
-  computed: {
-    withColumnCaption() {
-      let columns = [...this.columns]
-      let hasCaption = columns.some((col) => col.caption)
-      let result = []
-      this.columns.reduce((output, v, i) => {
-        if (output >= i) {
-          console.log(i)
-        } else {
-          if (v.caption && v.caption.colspan) {
-            output = i + v.caption.colspan - 1
-            result.push(v)
-          } else {
-            if (output < i) {
-              output = i
-              result.push(v)
-            }
-          }
-        }
-        return output
-      }, -1)
-      return hasCaption ? result : []
-    }
-  },
-  mounted() {}
+  }
 }
 </script>
 

@@ -1,10 +1,10 @@
 <template>
   <table>
     <colgroup>
-      <col v-for="(col, i) in columns" :key="i" :width="col.width || ''" />
+      <col v-for="col in columns" :key="col.prop" :width="col.width || ''" />
     </colgroup>
     <tbody>
-      <tr v-for="(row, i) in dataSource" :key="i" :id="row.id">
+      <tr v-for="row in dataSource" :key="row.id" :id="row.id">
         <td v-for="col in columns" :key="col.prop">
           <div :style="{ height: '30px' }">
             <slot

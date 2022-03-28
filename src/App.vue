@@ -10,7 +10,7 @@
 </template>
 <script>
 import AchoVirtualTable from './components/AchoVirtualTable/index.vue'
-
+import { nanoid } from 'nanoid'
 import { request } from './utils'
 export default {
   name: 'App',
@@ -36,10 +36,17 @@ export default {
           },
           caption: {
             slot: 'SearchCaption',
+            value: '',
             action: function (done = function () {}) {
-              const newData = data.filter(done)
-              if (newData.length) {
-                updateRow(newData)
+              const { value, prop } = done() || {}
+              if (value) {
+                updateRow(
+                  data.filter((item) => {
+                    return item[prop]
+                      .toUpperCase()
+                      .includes(value.toUpperCase())
+                  })
+                )
               } else {
                 updateRow(cacheSource)
               }
@@ -69,8 +76,14 @@ export default {
       })
       const { data: innerData } = JSON.parse(data) || {}
       const { columnConfig, tableData } = innerData || {}
-      this.cacheSource = tableData
-      this.dataSource = tableData
+
+      this.dataSource = tableData.map((item) => {
+        return {
+          ...item,
+          id: nanoid()
+        }
+      })
+      this.cacheSource = [...this.dataSource]
       this.columnConfig = columnConfig
     }
   }
