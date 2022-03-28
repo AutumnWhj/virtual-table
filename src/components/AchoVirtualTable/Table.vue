@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       itemWidth: 100,
+      bufSize: 10,
       start: 0,
       end: 0,
       transform: ''
@@ -89,11 +90,16 @@ export default {
   methods: {
     handleScrollLeft(event) {
       window.requestAnimationFrame(() => {
+        let bufSize = this.bufSize
         const scrollLeft = event.target.scrollLeft
         let start = Math.floor(scrollLeft / this.itemWidth)
-
-        this.start = Math.max(start, 0)
-        this.end = this.start + this.visibleCount
+        let extr = 0
+        if (start >= bufSize) {
+          bufSize -= 1
+          extr += 1
+        }
+        this.start = Math.max(start - bufSize, 0)
+        this.end = this.start + this.visibleCount + bufSize + extr
         // 更新偏移量
         this.transform = `translate3d(${this.itemWidth * this.start}px,0,0)`
       })
@@ -144,7 +150,6 @@ table th {
 .table-header {
   height: 100%;
   position: relative;
-  overflow-y: hidden;
   border: 1px solid #e9e9e9;
   position: sticky;
   top: 0;
